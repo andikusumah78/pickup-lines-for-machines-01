@@ -24,6 +24,11 @@ TEXT = (
     "and my loss has never been lower."
 )
 
+# The gate allows 1 to 200 characters; refuse loudly rather than writing
+# an invalid line if the text ever drifts past the cap.
+if not 1 <= len(TEXT) <= 200:
+    raise SystemExit(f"entry is {len(TEXT)} characters, must be 1-200")
+
 # Bytes, not text mode: text mode would write the platform's line ends
 # and its default encoding. The output directory is created when it does
 # not exist yet, so a local run with a fresh MAKEFUN_OUTPUT_DIR works
